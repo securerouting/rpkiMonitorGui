@@ -1,4 +1,6 @@
-<div class="panel panel-default">
+<h1>RPKI Client Monitor</h1>
+
+<div class="panel panel-primary">
   <div class="panel-heading">Data Sources</div>
   <div class="panel-body">
     <table class="table">
@@ -13,3 +15,25 @@
     </table>
   </div>
 </div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Prefix/ASNs</div>
+  <div class="panel-body">
+
+    <table class="table">
+      <tbody>
+	<tr><td>Current</td><td>[% prefixInfo.Current %]</td></tr>
+	<tr><td>Since</td><td>[% prefixInfo.Since %]</td></tr>
+	<tr><td>Added</td><td>[% prefixInfo.Added %]</td></tr>
+	<tr><td>Deleted</td><td>[% prefixInfo.Deleted %]</td></tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+
+	Current : 19985
+        Since 2016-02-15 23:11:05
+	Added   : 20048
+	Deleted : 63
