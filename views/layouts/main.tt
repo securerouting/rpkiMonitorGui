@@ -19,9 +19,9 @@
 
     [% INCLUDE top.tt %]
 
-    <div class="container">
+    <div class="container mainbox">
       <div class="row">
-	<div class="col-md-12" role="main">
+	<div class="col-md-9" role="main">
 
 	  <noscript>
 	    This site requires that you enable JavaScript for full support.
@@ -30,6 +30,17 @@
 	  </noscript>
 
 	  [% content %]
+	</div>
+	<div class="col-md-3" role="nav">
+	  <div class="panel panel-info">
+	    <div class="panel-heading">Jump to</div>
+	    <div class="panel-body">
+	      <ul nav navbar-nav navbar-right>
+		<li><a href="/rpki-rtr-client-monitor">The rpki client monitor</a></li>
+		<li><a href="/rcynic-status">RCYNIC status</a></li>
+	      </ul>
+	    </div>
+	  </div>
 	</div>
       </div>
     </div>
