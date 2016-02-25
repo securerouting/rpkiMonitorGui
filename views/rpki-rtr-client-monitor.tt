@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Data Sources</div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+	<tr><th>Source</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+	[% FOREACH source IN sources %]
+	  <tr><td>[% source.0 %]</td><td>[% source.1 %]</td></tr>
+	[% END %]
+      </tbody>
+    </table>
+  </div>
+</div>

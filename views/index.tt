@@ -1,1 +1,9 @@
-<p>hello world</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Places to go</div>
+  <div class="panel-body">
+    <ul>
+      <li><a href="/rpki-rtr-client-monitor">The rpki client monitor</a></li>
+    </ul>
+  </div>
+</div>
