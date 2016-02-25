@@ -16,3 +16,7 @@
 .spacetop {
     margin-top: 2em;
 }
+
+.twocol td {
+    width: 50%;
+}

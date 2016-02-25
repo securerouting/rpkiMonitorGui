@@ -3,7 +3,7 @@
 <div class="panel panel-primary spacetop">
   <div class="panel-heading">Statistics</div>
   <div class="panel-body">
-    <table class="table">
+    <table class="table twocol">
       <tbody>
         <tr><td>ROA's Current</td><td>[% ROAInformation.ROAsCurrent %]</td></tr>
         <tr><td>ROA's Added</td><td>[% ROAInformation.ROAsAdded %]</td></tr>
@@ -17,7 +17,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Error/Warning Summary</div>
   <div class="panel-body">
-    <table class="table ">
+    <table class="table twocol">
       <tbody>
 	<tr><td>Certificate failed validation</td><td>[% WarningInfo.FailedValidation %]</td></tr>
         <tr><td>Manifest lists missing object</td><td>[% WarningInfo.MissingObjects %]</td></tr>
@@ -34,7 +34,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Data Sources</div>
   <div class="panel-body">
-    <table class="table " id="">
+    <table class="table twocol" id="">
       <thead>
 	<tr><td>Source</td><td>Errors?</td></tr>
       </thead>

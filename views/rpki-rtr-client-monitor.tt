@@ -3,7 +3,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Data Sources</div>
   <div class="panel-body">
-    <table class="table">
+    <table class="table twocol">
       <thead>
 	<tr><th>Source</th><th>Status</th></tr>
       </thead>
@@ -20,7 +20,7 @@
   <div class="panel-heading">Prefix/ASNs</div>
   <div class="panel-body">
 
-    <table class="table">
+    <table class="table twocol">
       <tbody>
 	<tr><td>Current</td><td>[% prefixInfo.Current %]</td></tr>
 	<tr><td>Since</td><td>[% prefixInfo.Since %]</td></tr>
