@@ -1,0 +1,50 @@
+<h1>rcynic Information</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Statistics</div>
+  <div class="panel-body">
+    <table class="table">
+      <tbody>
+        <tr><td>ROA's Current</td><td>[% ROAInformation.ROAsCurrent %]</td></tr>
+        <tr><td>ROA's Added</td><td>[% ROAInformation.ROAsAdded %]</td></tr>
+	<tr><td>Router Keys Current</td><td>[% ROAInformation.KeysCurrent %]</td></tr>
+	<tr><td>Router Keys Added</td><td>[% ROAInformation.KeysAdded %]</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Error/Warning Summary</div>
+  <div class="panel-body">
+    <table class="table ">
+      <tbody>
+	<tr><td>Certificate failed validation</td><td>[% WarningInfo.FailedValidation %]</td></tr>
+        <tr><td>Manifest lists missing object</td><td>[% WarningInfo.MissingObjects %]</td></tr>
+	<tr><td>RFC 3779 resource not subset of parent's</td><td>[% WarningInfo.NotSubset %]</td></tr>
+        <tr><td>Object rejected</td><td>[% WarningInfo.Rejected %]</td></tr>
+        <tr><td>Policy Qualifier Comp.Protocols.Snmp</td><td>[% WarningInfo.CPS %]</td></tr>
+        <tr><td>Tainted by stale CRL</td><td>[% WarningInfo.StaleCRL %]</td></tr>
+        <tr><td>Tainted by stale manifest</td><td>[% WarningInfo.StaleManifest %]</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Data Sources</div>
+  <div class="panel-body">
+    <table class="table " id="">
+      <thead>
+	<tr><td>Source</td><td>Errors?</td></tr>
+      </thead>
+      <tbody>
+	[% FOREACH item IN DataSources %]
+	  <tr><td>[% item.0 %]</td><td class="[% item.1 %]">[% item.1 %]</td></tr>
+	[% END %]
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+</div>

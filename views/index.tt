@@ -4,6 +4,7 @@
   <div class="panel-body">
     <ul>
       <li><a href="/rpki-rtr-client-monitor">The rpki client monitor</a></li>
+      <li><a href="/rcynic-status">RCYNIC status</a></li>
     </ul>
   </div>
 </div>
