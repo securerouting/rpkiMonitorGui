@@ -31,7 +31,7 @@
 
 	  [% content %]
 	</div>
-	<div class="col-md-3" role="nav">
+	<div class="col-md-3 jumpto" role="nav">
 	  <div class="panel panel-info">
 	    <div class="panel-heading">Jump to</div>
 	    <div class="panel-body">
