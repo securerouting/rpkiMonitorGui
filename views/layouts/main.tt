@@ -12,6 +12,7 @@
     <meta name="keywords" content="dns, dnssec, monitoring, distributed, auditing">
     
     <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/handlebars-v4.0.5.js"></script>
     
   </head>
 
