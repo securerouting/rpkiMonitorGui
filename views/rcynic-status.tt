@@ -6,81 +6,83 @@
   </span>
 </h1>
 
-<div class="panel panel-primary spacetop">
-  <div class="panel-heading">Statistics
-    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
-  </div>
-  <div class="panel-body">
-    <table class="table twocol">
-      <tbody id="statistics">
-	<tr><td>Loading...</td><td></td></tr>
-      </tbody>
-    </table>
+<div id="mainpanel">
+  <div class="alert alert-info">
+    <p><strong>Loading...</strong></p>
   </div>
 </div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">Error/Warning Summary
-    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
-  </div>
-  <div class="panel-body">
-    <table class="table twocol">
-      <tbody id="errors">
-	<tr><td>Loading...</td><td></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<script id="panels-source" type="text/x-handlebars-template">
 
-<div class="panel panel-primary">
-  <div class="panel-heading">Data Sources
-    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+  {{#each this}}
+
+  <h2>{{@key}}</h2>
+  <div class="panel panel-primary spacetop">
+    <div class="panel-heading">Statistics
+      <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+    </div>
+    <div class="panel-body">
+      <table class="table twocol">
+	<tbody id="statistics">
+	  <tr><td>ROA's Current</td><td>{{ this.ROAInformation.ROAsCurrent }}</td></tr>
+	  <tr><td>ROA's Added</td><td>{{ this.ROAInformation.ROAsAdded }}</td></tr>
+	  <tr><td>Router Keys Current</td><td>{{ this.ROAInformation.KeysCurrent }}</td></tr>
+	  <tr><td>Router Keys Added</td><td>{{ this.ROAInformation.KeysAdded }}</td></tr>
+	</tbody>
+      </table>
+    </div>
   </div>
-  <div class="panel-body">
-    <table class="table twocol" id="">
-      <thead>
-	<tr><td>Source</td><td>Errors?</td></tr>
-      </thead>
-      <tbody id="data-sources">
-	<tr><td>Loading...</td><td></td></tr>
-      </tbody>
-      <tfoot>
-      </tfoot>
-    </table>
+  
+  <div class="panel panel-primary">
+    <div class="panel-heading">Error/Warning Summary
+      <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+    </div>
+    <div class="panel-body">
+      <table class="table twocol">
+	<tbody id="errors">
+	  <tr><td>Certificate failed validation</td><td>{{ this.WarningInfo.FailedValidation }}</td></tr>
+	  <tr><td>Manifest lists missing object</td><td>{{ this.WarningInfo.MissingObjects }}</td></tr>
+	  <tr><td>RFC 3779 resource not subset of parent's</td><td>{{ this.WarningInfo.NotSubset }}</td></tr>
+	  <tr><td>Object rejected</td><td>{{ this.WarningInfo.Rejected }}</td></tr>
+	  <tr><td>Policy Qualifier Comp.Protocols.Snmp</td><td>{{ this.WarningInfo.Comp.Protocols.Snmp }}</td></tr>
+	  <tr><td>Tainted by stale CRL</td><td>{{ this.WarningInfo.StaleCRL }}</td></tr>
+	  <tr><td>Tainted by stale manifest</td><td>{{ this.WarningInfo.StaleManifest }}</td></tr>
+	</tbody>
+      </table>
+    </div>
   </div>
-</div>
 
-<script id="statistics-source" type="text/x-handlebars-template">
-  <tr><td>ROA's Current</td><td>{{ this.ROAInformation.ROAsCurrent }}</td></tr>
-  <tr><td>ROA's Added</td><td>{{ this.ROAInformation.ROAsAdded }}</td></tr>
-  <tr><td>Router Keys Current</td><td>{{ this.ROAInformation.KeysCurrent }}</td></tr>
-  <tr><td>Router Keys Added</td><td>{{ this.ROAInformation.KeysAdded }}</td></tr>
-</script>
-
-<script id="errors-source" type="text/x-handlebars-template">
-  <tr><td>Certificate failed validation</td><td>{{ this.WarningInfo.FailedValidation }}</td></tr>
-  <tr><td>Manifest lists missing object</td><td>{{ this.WarningInfo.MissingObjects }}</td></tr>
-  <tr><td>RFC 3779 resource not subset of parent's</td><td>{{ this.WarningInfo.NotSubset }}</td></tr>
-  <tr><td>Object rejected</td><td>{{ this.WarningInfo.Rejected }}</td></tr>
-  <tr><td>Policy Qualifier Comp.Protocols.Snmp</td><td>{{ this.WarningInfo.Comp.Protocols.Snmp }}</td></tr>
-  <tr><td>Tainted by stale CRL</td><td>{{ this.WarningInfo.StaleCRL }}</td></tr>
-  <tr><td>Tainted by stale manifest</td><td>{{ this.WarningInfo.StaleManifest }}</td></tr>
-</script>
-
-<script id="data-sources-source" type="text/x-handlebars-template">
-  {{#each this.DataSources }}
-    <tr><td>{{ this.[0] }}</td><td class="{{ this.[1] }}">{{ this.[1] }}</td></tr>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Data Sources
+      <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+    </div>
+    <div class="panel-body">
+      <table class="table twocol" id="">
+	<thead>
+	  <tr><td>Source</td><td>Errors?</td></tr>
+	</thead>
+	<tbody id="data-sources">
+	  {{#each this.DataSources }}
+	    <tr><td>{{ this.[0] }}</td><td class="{{ this.[1] }}">{{ this.[1] }}</td></tr>
+	  {{/each}}
+	</tbody>
+	<tfoot>
+	</tfoot>
+      </table>
+    </div>
+  </div>
   {{/each}}
+
 </script>
 
 <script>
+ console.log("starting");
  function loadPageFrames() {
+   console.log("starting2");
    rpkiLoadFrames('/rcynic-status-data',
-		  [{ source: 'statistics-source',   frame: 'statistics'},
-		   { source: 'errors-source',       frame: 'errors'},
-		   { source: 'data-sources-source', frame: 'data-sources'},
+		  [{ source: 'panels-source',       frame: 'mainpanel'}
 		  ],
-		  { reloadIconId: 'rpkiLoading'});
+		  { reloadIconId: 'rpkiLoading', debug: 1});
  }
  loadPageFrames();
 </script> 
