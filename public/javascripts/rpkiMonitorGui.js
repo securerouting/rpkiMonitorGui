@@ -56,7 +56,6 @@ function rpkiLoadFrames(fromurl, framesToUpdate, options) {
 	    }
 
 	    $('#tabnav    a:first').tab('show');
-	    console.log("shown");
 	},
 	error: function() {
 	    alert ("failed to load some data from the server");
