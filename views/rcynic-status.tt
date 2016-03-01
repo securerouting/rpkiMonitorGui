@@ -7,7 +7,9 @@
 </h1>
 
 <div class="panel panel-primary spacetop">
-  <div class="panel-heading">Statistics</div>
+  <div class="panel-heading">Statistics
+    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+  </div>
   <div class="panel-body">
     <table class="table twocol">
       <tbody id="statistics">
@@ -18,7 +20,9 @@
 </div>
 
 <div class="panel panel-primary">
-  <div class="panel-heading">Error/Warning Summary</div>
+  <div class="panel-heading">Error/Warning Summary
+    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+  </div>
   <div class="panel-body">
     <table class="table twocol">
       <tbody id="errors">
@@ -29,7 +33,9 @@
 </div>
 
 <div class="panel panel-primary">
-  <div class="panel-heading">Data Sources</div>
+  <div class="panel-heading">Data Sources
+    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+  </div>
   <div class="panel-body">
     <table class="table twocol" id="">
       <thead>
@@ -73,7 +79,8 @@
 		  [{ source: 'statistics-source',   frame: 'statistics'},
 		   { source: 'errors-source',       frame: 'errors'},
 		   { source: 'data-sources-source', frame: 'data-sources'},
-		  ]);
+		  ],
+		  { reloadIconId: 'rpkiLoading'});
  }
  loadPageFrames();
 </script> 
