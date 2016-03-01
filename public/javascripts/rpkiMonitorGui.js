@@ -3,7 +3,6 @@ var template = Handlebars.compile(source);
 
 function rpkiLoadFrames(fromurl, framesToUpdate) {
     var compiledSources = {};
-    console.log("loading " + fromurl);
     $.ajax({
 	url:  fromurl,
 	type: 'GET',
@@ -11,7 +10,6 @@ function rpkiLoadFrames(fromurl, framesToUpdate) {
 	    // note: not sure why this is getting on object instead of a string
 	    // that needs to be passed to JSON.parse() first
 
-	    console.log(framesToUpdate);
 	    for(var i = 0; i < framesToUpdate.length; i++) {
 		var sourceid = framesToUpdate[i][0];
 		var frameid = framesToUpdate[i][1];
@@ -30,7 +28,6 @@ function rpkiLoadFrames(fromurl, framesToUpdate) {
 
 		var htmlOutput = compiledSources[sourceid](result);
 		
-		console.log(htmlOutput);
 		if (htmlOutput) {
 		    $('#' + frameid).html(htmlOutput);
 		} else {
