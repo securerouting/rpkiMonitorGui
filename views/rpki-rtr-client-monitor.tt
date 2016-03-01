@@ -39,19 +39,7 @@
 </script>  
 
 <script>
- var source = jQuery("#rpki-rtr-client-monitor-data").html();
- var template = Handlebars.compile(source);
-
- context = {
-   sources: [
-   ['ipv4::141.22.28.222::23072',  'INTEGER: up(1)'],
-   ['ipv4::141.22.28.222::23073',  'INTEGER: down(2)'],
- ]};
-
- console.log("template: " + template);
- var out = template(context);
- console.log("here: " + out);
- jQuery("#sourcecontent").html(out);
+ rpkiLoadFrame('/rpki-rtr-client-monitor-data', 'rpki-rtr-client-monitor-data', 'sourcecontent');
 </script> 
 
 
