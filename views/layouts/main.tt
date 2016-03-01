@@ -12,9 +12,10 @@
     <meta name="keywords" content="dns, dnssec, monitoring, distributed, auditing">
     
     <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/javascripts/handlebars-v4.0.5.js"></script>
     <script type="text/javascript" src="/javascripts/rpkiMonitorGui.js"></script>
-    
+
   </head>
 
   <body>
@@ -49,9 +50,5 @@
 
     [% INCLUDE bottom.tt %]
 
-    <script type="text/javascript">/* <![CDATA[ */
-     !window.jQuery && document.write('<script type="text/javascript" src="<% request.uri_base %>/javascripts/jquery.js"><\/script>')
-     /* ]]> */</script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>

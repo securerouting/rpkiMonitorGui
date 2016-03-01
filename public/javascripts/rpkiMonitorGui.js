@@ -53,8 +53,10 @@ function rpkiLoadFrames(fromurl, framesToUpdate, options) {
 
 	    if (options && 'reloadIconId' in options) {
 		$("." + options['reloadIconId']).css('visibility','hidden');
-		console.log("hiding");
 	    }
+
+	    $('#tabnav    a:first').tab('show');
+	    console.log("shown");
 	},
 	error: function() {
 	    alert ("failed to load some data from the server");
