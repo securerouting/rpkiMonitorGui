@@ -7,10 +7,8 @@
       <thead>
 	<tr><th>Source</th><th>Status</th></tr>
       </thead>
-      <tbody>
-	[% FOREACH source IN sources %]
-	  <tr><td>[% source.0 %]</td><td>[% source.1 %]</td></tr>
-	[% END %]
+      <tbody id="sourcecontent">
+	<tr><td>Loading...</td><td></td></tr>
       </tbody>
     </table>
   </div>
@@ -33,3 +31,28 @@
   </div>
 </div>
 
+<script id="rpki-rtr-client-monitor-data" type="text/x-handlebars-template">
+  hi
+  {{#each sources}}
+    <tr><td>{{ this.[0] }}</td><td>{{ this.[1] }}</td></tr>
+  {{/each}}
+</script>  
+
+<script>
+ var source = jQuery("#rpki-rtr-client-monitor-data").html();
+ var template = Handlebars.compile(source);
+
+ context = {
+   sources: [
+   ['ipv4::141.22.28.222::23072',  'INTEGER: up(1)'],
+   ['ipv4::141.22.28.222::23073',  'INTEGER: down(2)'],
+ ]};
+
+ console.log("template: " + template);
+ var out = template(context);
+ console.log("here: " + out);
+ jQuery("#sourcecontent").html(out);
+</script> 
+
+
+ 

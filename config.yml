@@ -33,3 +33,5 @@ engines:
 #     Database:
 #         driver: 'SQLite'
 #         database: '/tmp/db.sqlite'
+
+serializer: JSON
