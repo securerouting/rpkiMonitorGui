@@ -1,7 +1,7 @@
 var source = jQuery("#rpki-rtr-client-monitor-data").html();
 var template = Handlebars.compile(source);
 
-function rpkiLoadFrame(fromurl, framesToUpdate) {
+function rpkiLoadFrames(fromurl, framesToUpdate) {
     var compiledSources = {};
     $.ajax({
 	url:  fromurl,

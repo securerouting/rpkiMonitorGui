@@ -39,7 +39,7 @@
 </script>  
 
 <script>
- rpkiLoadFrame('/rpki-rtr-client-monitor-data', [['rpki-rtr-client-monitor-data', 'sourcecontent']]);
+ rpkiLoadFrames('/rpki-rtr-client-monitor-data', [['rpki-rtr-client-monitor-data', 'sourcecontent']]);
 </script> 
 
 
