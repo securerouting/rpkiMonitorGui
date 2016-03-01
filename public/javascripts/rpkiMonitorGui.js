@@ -1,5 +1,8 @@
-function rpkiLoadFrames(fromurl, framesToUpdate) {
+function rpkiLoadFrames(fromurl, framesToUpdate, options) {
     var compiledSources = {};
+    if (options && 'reloadIconId' in options) {
+	$("." + options['reloadIconId']).css('visibility','visible');
+    }
     $.ajax({
 	url:  fromurl,
 	type: 'GET',
@@ -31,9 +34,18 @@ function rpkiLoadFrames(fromurl, framesToUpdate) {
 		    alert("failed to decode some data from the server");
 		}
 	    }
+
+	    if (options && 'reloadIconId' in options) {
+		$("." + options['reloadIconId']).css('visibility','hidden');
+		console.log("hiding");
+	    }
 	},
 	error: function() {
 	    alert ("failed to load some data from the server");
+
+	    if (options && 'reloadIconId' in options) {
+		$("." + options['reloadIconId']).css('visibility','hidden');
+	    }
 	}
     });
 }  

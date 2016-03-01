@@ -7,7 +7,9 @@
 </h1>
 
 <div class="panel panel-primary">
-  <div class="panel-heading">Data Sources</div>
+  <div class="panel-heading">Data Sources
+    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+  </div>
   <div class="panel-body">
     <table class="table twocol">
       <thead>
@@ -21,7 +23,9 @@
 </div>
 
 <div class="panel panel-primary">
-  <div class="panel-heading">Prefix/ASNs</div>
+  <div class="panel-heading">Prefix/ASNs
+    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
+  </div>
   <div class="panel-body">
 
     <table class="table twocol">
@@ -52,7 +56,8 @@
    rpkiLoadFrames('/rpki-rtr-client-monitor-data',
 		  [{ source: 'rpki-rtr-client-monitor-sources',  frame: 'sourcecontent'},
 		   { source: 'rpki-rtr-client-monitor-prefixes', frame: 'prefixasns'},
-		  ]);
+		  ],
+		  { reloadIconId: 'rpkiLoading'});
  }
  loadPageFrames();
 </script> 
