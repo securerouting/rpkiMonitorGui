@@ -35,7 +35,7 @@
 	</div>
 	<div class="col-md-3 jumpto" role="nav">
 	  <div class="panel panel-info">
-	    <div class="panel-heading">Jump to</div>
+	    <div class="panel-heading">Jump To</div>
 	    <div class="panel-body">
 	      <ul nav navbar-nav navbar-right>
 		<li><a href="/rpki-rtr-client-monitor">The rpki client monitor</a></li>
