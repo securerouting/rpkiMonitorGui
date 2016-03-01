@@ -19,11 +19,8 @@
   <div class="panel-body">
 
     <table class="table twocol">
-      <tbody>
-	<tr><td>Current</td><td>[% prefixInfo.Current %]</td></tr>
-	<tr><td>Since</td><td>[% prefixInfo.Since %]</td></tr>
-	<tr><td>Added</td><td>[% prefixInfo.Added %]</td></tr>
-	<tr><td>Deleted</td><td>[% prefixInfo.Deleted %]</td></tr>
+      <tbody id="prefixasns">
+	<tr><td>Loading...</td><td></td></tr>
       </tbody>
     </table>
 
@@ -31,15 +28,24 @@
   </div>
 </div>
 
-<script id="rpki-rtr-client-monitor-data" type="text/x-handlebars-template">
-  hi
+<script id="rpki-rtr-client-monitor-sources" type="text/x-handlebars-template">
   {{#each sources}}
     <tr><td>{{ this.[0] }}</td><td>{{ this.[1] }}</td></tr>
   {{/each}}
 </script>  
 
+<script id="rpki-rtr-client-monitor-prefixes" type="text/x-handlebars-template">
+  <tr><td>Current</td><td>{{ this.prefixInfo.Current }}</td></tr>
+  <tr><td>Since</td><td>{{ this.prefixInfo.Since }}</td></tr>
+  <tr><td>Added</td><td>{{ this.prefixInfo.Added }}</td></tr>
+  <tr><td>Deleted</td><td>{{ this.prefixInfo.Deleted }}</td></tr>
+</script>
+
 <script>
- rpkiLoadFrames('/rpki-rtr-client-monitor-data', [['rpki-rtr-client-monitor-data', 'sourcecontent']]);
+ rpkiLoadFrames('/rpki-rtr-client-monitor-data',
+		[['rpki-rtr-client-monitor-sources',  'sourcecontent'],
+		 ['rpki-rtr-client-monitor-prefixes', 'prefixasns'],
+		]);
 </script> 
 
 
