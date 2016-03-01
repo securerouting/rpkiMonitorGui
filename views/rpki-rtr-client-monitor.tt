@@ -43,8 +43,8 @@
 
 <script>
  rpkiLoadFrames('/rpki-rtr-client-monitor-data',
-		[['rpki-rtr-client-monitor-sources',  'sourcecontent'],
-		 ['rpki-rtr-client-monitor-prefixes', 'prefixasns'],
+		[{ source: 'rpki-rtr-client-monitor-sources',  frame: 'sourcecontent'},
+		 { source: 'rpki-rtr-client-monitor-prefixes', frame: 'prefixasns'},
 		]);
 </script> 
 

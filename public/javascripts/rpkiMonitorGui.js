@@ -1,6 +1,3 @@
-var source = jQuery("#rpki-rtr-client-monitor-data").html();
-var template = Handlebars.compile(source);
-
 function rpkiLoadFrames(fromurl, framesToUpdate) {
     var compiledSources = {};
     $.ajax({
@@ -11,8 +8,8 @@ function rpkiLoadFrames(fromurl, framesToUpdate) {
 	    // that needs to be passed to JSON.parse() first
 
 	    for(var i = 0; i < framesToUpdate.length; i++) {
-		var sourceid = framesToUpdate[i][0];
-		var frameid = framesToUpdate[i][1];
+		var sourceid = framesToUpdate[i]['source'];
+		var frameid = framesToUpdate[i]['frame'];
 		var sourceFrame = $("#" + sourceid).html();
 		if (! sourceFrame) {
 		    alert("error in web page ; see console for technical details");

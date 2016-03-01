@@ -63,8 +63,8 @@
 
 <script>
  rpkiLoadFrames('/rcynic-status-data',
-		[['statistics-source',   'statistics'],
-		 ['errors-source',       'errors'],
-		 ['data-sources-source', 'data-sources'],
+		[{ source: 'statistics-source',   frame: 'statistics'},
+		 { source: 'errors-source',       frame: 'errors'},
+		 { source: 'data-sources-source', frame: 'data-sources'},
 		]);
 </script> 
