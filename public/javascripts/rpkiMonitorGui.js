@@ -3,6 +3,7 @@ var template = Handlebars.compile(source);
 
 function rpkiLoadFrames(fromurl, framesToUpdate) {
     var compiledSources = {};
+    console.log("loading " + fromurl);
     $.ajax({
 	url:  fromurl,
 	type: 'GET',
@@ -29,6 +30,7 @@ function rpkiLoadFrames(fromurl, framesToUpdate) {
 
 		var htmlOutput = compiledSources[sourceid](result);
 		
+		console.log(htmlOutput);
 		if (htmlOutput) {
 		    $('#' + frameid).html(htmlOutput);
 		} else {

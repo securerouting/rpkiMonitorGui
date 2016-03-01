@@ -4,11 +4,8 @@
   <div class="panel-heading">Statistics</div>
   <div class="panel-body">
     <table class="table twocol">
-      <tbody>
-        <tr><td>ROA's Current</td><td>[% ROAInformation.ROAsCurrent %]</td></tr>
-        <tr><td>ROA's Added</td><td>[% ROAInformation.ROAsAdded %]</td></tr>
-	<tr><td>Router Keys Current</td><td>[% ROAInformation.KeysCurrent %]</td></tr>
-	<tr><td>Router Keys Added</td><td>[% ROAInformation.KeysAdded %]</td></tr>
+      <tbody id="statistics">
+	<tr><td>Loading...</td><td></td></tr>
       </tbody>
     </table>
   </div>
@@ -18,14 +15,8 @@
   <div class="panel-heading">Error/Warning Summary</div>
   <div class="panel-body">
     <table class="table twocol">
-      <tbody>
-	<tr><td>Certificate failed validation</td><td>[% WarningInfo.FailedValidation %]</td></tr>
-        <tr><td>Manifest lists missing object</td><td>[% WarningInfo.MissingObjects %]</td></tr>
-	<tr><td>RFC 3779 resource not subset of parent's</td><td>[% WarningInfo.NotSubset %]</td></tr>
-        <tr><td>Object rejected</td><td>[% WarningInfo.Rejected %]</td></tr>
-        <tr><td>Policy Qualifier Comp.Protocols.Snmp</td><td>[% WarningInfo.CPS %]</td></tr>
-        <tr><td>Tainted by stale CRL</td><td>[% WarningInfo.StaleCRL %]</td></tr>
-        <tr><td>Tainted by stale manifest</td><td>[% WarningInfo.StaleManifest %]</td></tr>
+      <tbody id="errors">
+	<tr><td>Loading...</td><td></td></tr>
       </tbody>
     </table>
   </div>
@@ -38,13 +29,42 @@
       <thead>
 	<tr><td>Source</td><td>Errors?</td></tr>
       </thead>
-      <tbody>
-	[% FOREACH item IN DataSources %]
-	  <tr><td>[% item.0 %]</td><td class="[% item.1 %]">[% item.1 %]</td></tr>
-	[% END %]
+      <tbody id="data-sources">
+	<tr><td>Loading...</td><td></td></tr>
       </tbody>
       <tfoot>
       </tfoot>
     </table>
   </div>
 </div>
+
+<script id="statistics-source" type="text/x-handlebars-template">
+  <tr><td>ROA's Current</td><td>{{ this.ROAInformation.ROAsCurrent }}</td></tr>
+  <tr><td>ROA's Added</td><td>{{ this.ROAInformation.ROAsAdded }}</td></tr>
+  <tr><td>Router Keys Current</td><td>{{ this.ROAInformation.KeysCurrent }}</td></tr>
+  <tr><td>Router Keys Added</td><td>{{ this.ROAInformation.KeysAdded }}</td></tr>
+</script>
+
+<script id="errors-source" type="text/x-handlebars-template">
+  <tr><td>Certificate failed validation</td><td>{{ this.WarningInfo.FailedValidation }}</td></tr>
+  <tr><td>Manifest lists missing object</td><td>{{ this.WarningInfo.MissingObjects }}</td></tr>
+  <tr><td>RFC 3779 resource not subset of parent's</td><td>{{ this.WarningInfo.NotSubset }}</td></tr>
+  <tr><td>Object rejected</td><td>{{ this.WarningInfo.Rejected }}</td></tr>
+  <tr><td>Policy Qualifier Comp.Protocols.Snmp</td><td>{{ this.WarningInfo.Comp.Protocols.Snmp }}</td></tr>
+  <tr><td>Tainted by stale CRL</td><td>{{ this.WarningInfo.StaleCRL }}</td></tr>
+  <tr><td>Tainted by stale manifest</td><td>{{ this.WarningInfo.StaleManifest }}</td></tr>
+</script>
+
+<script id="data-sources-source" type="text/x-handlebars-template">
+  {{#each this.DataSources }}
+    <tr><td>{{ this.[0] }}</td><td class="{{ this.[1] }}">{{ this.[1] }}</td></tr>
+  {{/each}}
+</script>
+
+<script>
+ rpkiLoadFrames('/rcynic-status-data',
+		[['statistics-source',   'statistics'],
+		 ['errors-source',       'errors'],
+		 ['data-sources-source', 'data-sources'],
+		]);
+</script> 

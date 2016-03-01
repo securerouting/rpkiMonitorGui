@@ -29,25 +29,10 @@ get '/rpki-rtr-client-monitor-data' => sub {
 };
 
 get '/rpki-rtr-client-monitor' => sub {
-	
-	my %data = (
-	            date => '2016-02-15 23:11:05',
-	            sources => [
-	                        ['ipv4::141.22.28.222::23072',  'INTEGER: up(1)'],
-	                        ['ipvnone::141.22.28.222::23073',  'INTEGER: up(1)'],
-	                       ],
-	            prefixInfo => {
-	                           Current => 19985,
-	                           Since => '2016-02-15 23:11:05',
-	                           Added => 20048,
-	                           Deleted => 63
-	                          }
-	           );
-
-	return template 'rpki-rtr-client-monitor' => \%data;
+	return template 'rpki-rtr-client-monitor';
 };
 
-get '/rcynic-status' => sub {
+get '/rcynic-status-data' => sub {
 	my %data = (
 	            ROAInformation =>
 	            {
@@ -87,7 +72,11 @@ get '/rcynic-status' => sub {
 	            ]
 	           );	            
 
-	return template 'rcynic-status' => \%data;
+	return \%data;
+};
+
+get '/rcynic-status' => sub {
+	return template 'rcynic-status';
 };
 
 true;
