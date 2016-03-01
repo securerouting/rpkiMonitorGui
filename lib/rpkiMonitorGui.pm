@@ -13,7 +13,7 @@ get '/rpki-rtr-client-monitor-data' => sub {
 	my %data = (
 	            date => '2016-02-15 23:11:05',
 	            sources => [
-	                        ['ipv4::141.22.28.222::23072',  'INTEGER: up(1)'],
+	                        ['ipv4::141.22.28.222::' . int(rand 10000),  'INTEGER: up(1)'],
 	                        ['ipvnone::141.22.28.222::23073',  'INTEGER: up(1)'],
 	                       ],
 	            prefixInfo => {
@@ -36,7 +36,7 @@ get '/rcynic-status-data' => sub {
 	my %data = (
 	            ROAInformation =>
 	            {
-	             ROAsCurrent => 4224,
+	             ROAsCurrent => int(rand 10000),
 	             ROAsAdded => 4224,
 	             KeysCurrent => 0,
 	             KeysAdded => 0,

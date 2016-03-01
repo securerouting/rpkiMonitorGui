@@ -1,4 +1,10 @@
-<h1>RPKI Client Monitor</h1>
+<h1>RPKI Client Monitor
+  <span class="pull-right">
+    <button class="btn btn-default" onclick="loadPageFrames();">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+    </button>
+  </span>
+</h1>
 
 <div class="panel panel-primary">
   <div class="panel-heading">Data Sources</div>
@@ -42,10 +48,13 @@
 </script>
 
 <script>
- rpkiLoadFrames('/rpki-rtr-client-monitor-data',
-		[{ source: 'rpki-rtr-client-monitor-sources',  frame: 'sourcecontent'},
-		 { source: 'rpki-rtr-client-monitor-prefixes', frame: 'prefixasns'},
-		]);
+ function loadPageFrames() {
+   rpkiLoadFrames('/rpki-rtr-client-monitor-data',
+		  [{ source: 'rpki-rtr-client-monitor-sources',  frame: 'sourcecontent'},
+		   { source: 'rpki-rtr-client-monitor-prefixes', frame: 'prefixasns'},
+		  ]);
+ }
+ loadPageFrames();
 </script> 
 
 
