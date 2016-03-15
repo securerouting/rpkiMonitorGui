@@ -13,7 +13,18 @@
   <div class="panel-body">
     <table class="table twocol">
       <thead>
-	<tr><th>Source</th><th>Status</th></tr>
+	<tr>
+	  <th>Router</th>
+	  <th>Address</th>
+[%#	  <th>Source</th>
+	  <th>Status</th>
+%]
+	  <th>Last Checked</th>
+	  <th>Current # of Prefixes</th>
+	  <th>Prefixes Added</th>
+	  <th>Prefixes Deleted</th>
+	  <th>Since</th>
+	</tr>
       </thead>
       <tbody id="sourcecontent">
 	<tr><td>Loading...</td><td></td></tr>
@@ -22,40 +33,27 @@
   </div>
 </div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">Prefix/ASNs
-    <span class="glyphicon glyphicon-hourglass rpkiLoading pull-right" aria-hidden="true"></span>
-  </div>
-  <div class="panel-body">
-
-    <table class="table twocol">
-      <tbody id="prefixasns">
-	<tr><td>Loading...</td><td></td></tr>
-      </tbody>
-    </table>
-
-
-  </div>
-</div>
-
-<script id="rpki-rtr-client-monitor-sources" type="text/x-handlebars-template">
+<script id="rpki-rtr-client-monitor-list" type="text/x-handlebars-template">
   {{#each sources}}
-    <tr><td>{{ this.[0] }}</td><td>{{ this.[1] }}</td></tr>
+    <tr>
+      <td>{{ this.name }}</td>
+      <td>{{ this.location }}</td>
+[%#      <td>{{ this.source }}</td>
+      <td>{{ this.status }}</td>
+%]
+      <td>{{ this.last_date }}</td>
+      <td>{{ this.current_prefixes }}</td>
+      <td>{{ this.prefixes_added }}</td>
+      <td>{{ this.prefixes_deleted }}</td>
+      <td>{{ this.start_date }}</td>
+    </tr>
   {{/each}}
 </script>  
-
-<script id="rpki-rtr-client-monitor-prefixes" type="text/x-handlebars-template">
-  <tr><td>Current</td><td>{{ this.prefixInfo.Current }}</td></tr>
-  <tr><td>Since</td><td>{{ this.prefixInfo.Since }}</td></tr>
-  <tr><td>Added</td><td>{{ this.prefixInfo.Added }}</td></tr>
-  <tr><td>Deleted</td><td>{{ this.prefixInfo.Deleted }}</td></tr>
-</script>
 
 <script>
  function loadPageFrames() {
    rpkiLoadFrames('/rpki-rtr-client-monitor-data',
-		  [{ source: 'rpki-rtr-client-monitor-sources',  frame: 'sourcecontent'},
-		   { source: 'rpki-rtr-client-monitor-prefixes', frame: 'prefixasns'},
+		  [{ source: 'rpki-rtr-client-monitor-list',  frame: 'sourcecontent'},
 		  ],
 		  { reloadIconId: 'rpkiLoading'});
  }
