@@ -1,0 +1,72 @@
+
+rpkiMonitorGUI
+==================
+
+1 Introduction
+--------------
+
+This tool provides a web interface for monitoring BGP RPKI-RTR cache's
+and client information on a network.  This package is Perl based.  It
+gathers information from the RPKI-RTR clients using SNMP to get data
+from the RPKI-RTR-MIB (http://datatracker.ietf.org/doc/rfc6945/).  It
+gathers data from the Rcynic RPKI-RTR cache
+(http://rpki.net/wiki/doc/RPKI/RP/rcynic).
+
+2 Requirements
+--------------
+
+To build and run:
+  * Perl
+  * Perl Dancer
+  * net-snmp-utils
+
+3 Compilation
+-------------
+
+perl Makefile.pl
+
+
+4 Using
+-------
+
+run bin/app.pl.  Use a web browser to connect to the GUI.  By default,
+the web server runs on port 3000.  Currently the configuration is done
+within the lib/rpkiMonitorGui.pm file.  The config hashes in that file
+can be configured to indicate the cache RPKI-RTR-MIB sources (snmpv2c
+supported) and the Rcynic rcynic.xml files to use as sources.
+
+
+License
+-------
+
+Copyright (c) 2016, Parsons, Corp.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+*  Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+*  Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+*  Neither the name of Parsons, Corp nor the names of its contributors may
+   be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS
+IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT
+HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+LICENSE
