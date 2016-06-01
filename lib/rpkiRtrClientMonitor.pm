@@ -193,18 +193,48 @@ sub get_prefix_origin_table {
 	  "snmpwalk -v 2c -c $pass -C E $stop $host $start |" ) ||
 	die "Unable to open snmpwalk: $@\n";
 
-    while (my $line = <$SW_H>) { 
+    while (my $line = <$SW_H>) {
+	my $index = "";
+	my $col   = 0;
+	my $val   = 0;
 	# mprint $line;
-	#                   servid.   type.     addr.   mipref.mapref.asn  
-	if ( $line =~ /^.*::([^.]+)\.([^.]+)\."(.*)"\.(\d+)\.(\d+)\.(\d+).0\s+=\s+Gauge32:\s+(\d+)/ ) {
-	    my $index = "$2::$3::$4::$5::$6";
+	#                   column. addrtype.  addr.  mipref.mapref .asn  
+	if ( $line =~ /^.*::([^.]+)\.([^.]+)\."(.*)"\.(\d+)\.(\d+)\.(\d+).(\d+)\s+=\s+Gauge32:\s+(\d+)/ 
+	    ) {
+	    $col = $1;
+	    $val = $8;
+	    $index = "$2::$3::$4::$5::$6";
 	    if ( exists $table{"$index"} ) {
-		printf "Warning: Dublicate : prefix orgin table : \'$index\'\n";
+#		printf "Warning: Dublicate : prefix orgin table : \'$index\'\n";
 	    }
-	    $table{"$index"}{"$1"} = $7;
-#	    printf "table{$2::$3::$4::$5::$6}{$1} = $7\n" if (exists $opts{d});
 	}
-	
+	elsif ( $line =~ /^.*\.218\.1\.4\.1\.(\d+)\.(\d+)\.([\d.]+)\.(\d+)\.(\d+)\.(\d+)\.(\d+)\s+=\s+Gauge32:\s+(\d+)/
+	    ) {
+	    $col = $1;
+	    $val = $8;
+	    my $prefix  = "$2::";
+	    my $postfix = "::$4::$5::$6::$7";
+	    my $addr    = $3;
+	    my @aa = split /\./, $addr;
+	    if ( 4 == shift @aa ) {
+		$addr = sprintf "%d", $aa[0];
+		for(my $i = 1; $i <= $#aa; $i++) {
+		    $addr = "$addr" . sprintf ".%d", $aa[$i];
+		}
+	    }
+	    else {
+		$addr = sprintf "%02x", $aa[0];
+		for(my $i = 1; $i <= $#aa; $i++) {
+		    $addr = "$addr" . sprintf ":%02x", $aa[$i];
+		}
+	    }
+	    $index = $prefix . $addr . $postfix;
+	}
+	if ( exists $table{"$index"} ) {
+#	    printf "Warning: Dublicate : prefix orgin table : \'$index\'\n";
+	}
+	$table{"$index"}{"$col"} = $val;
+	# printf "table{$2::$3::$4::$5::$6}{\"$col\"} = $val\n";
     }
 
     close $SW_H;
