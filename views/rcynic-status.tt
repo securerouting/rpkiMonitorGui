@@ -55,7 +55,7 @@
 	    <tr><td>Manifest lists missing object</td><td>{{ this.WarningInfo.MissingObjects }}</td></tr>
 	    <tr><td>RFC 3779 resource not subset of parent's</td><td>{{ this.WarningInfo.NotSubset }}</td></tr>
 	    <tr><td>Object rejected</td><td>{{ this.WarningInfo.Rejected }}</td></tr>
-	    <tr><td>Policy Qualifier Comp.Protocols.Snmp</td><td>{{ this.WarningInfo.Comp.Protocols.Snmp }}</td></tr>
+	    <tr><td>Policy Qualifier CPS</td><td>{{ this.WarningInfo.CPS }}</td></tr>
 	    <tr><td>Tainted by stale CRL</td><td>{{ this.WarningInfo.StaleCRL }}</td></tr>
 	    <tr><td>Tainted by stale manifest</td><td>{{ this.WarningInfo.StaleManifest }}</td></tr>
 	  </tbody>

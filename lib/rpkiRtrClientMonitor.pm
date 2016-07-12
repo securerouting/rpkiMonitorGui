@@ -21,35 +21,34 @@ sub rpkiRtrClientMonitor_getData {
     my ($sources_p) = @_;
     
     my $debug = 0;
-    my %hist = ();
-    $hist{"adds"}    = 0;
-    $hist{"deletes"} = 0;
     
     my %data = ();
     my @dsources = ();
 
-    my $old_pot = 0;
-
     foreach my $source ( @{$sources_p->{hosts}} ) {
+	if ( ! exists $source->{hist} ) {
+	    $source->{hist}{adds}    = 0;
+	    $source->{hist}{deletes} = 0;
+	}
 	my %src_h = ();
-
-	$src_h{name}     = $source->{name};
-	$src_h{location} = $source->{location};
 
 	# XXX as OO this will make more sense
 	my $dt =  DateTime->now;
 	my $dtstring = sprintf "%s", $dt;
-	if ( !exists $src_h{start_date} ) {
-	    $src_h{start_date} = $dtstring;
+	if ( !exists $source->{start_date} ) {
+	    $source->{start_date} = $dtstring;
 	}
-	$src_h{last_date} = $dtstring;
+	$source->{last_date} = $dtstring;
+	
+	$src_h{name}       = $source->{name};
+	$src_h{location}   = $source->{location};
+	$src_h{start_date} = $source->{start_date};
+	$src_h{last_date}  = $source->{last_date};
 	
 	my $cst = get_cache_server_table($source->{location}, 
 					 $source->{password});
 
-
 	for my $i (keys %$cst) {
-# source XXX needs to be array eventually
 	    $src_h{source} = $i;
 	    if ( $cst->{$i}{"rpkiRtrCacheServerConnectionStatus"} =~ /up/ ) {
 		$src_h{status} = "UP";
@@ -67,18 +66,17 @@ sub rpkiRtrClientMonitor_getData {
 					  $source->{password});
 
 	my @pota = (keys %$pot);
-
-	$src_h{current_prefixes} = ($#pota + 1);
+	$src_h{current_prefixes} = $source->{current_prefixes} = ($#pota + 1);
 
 	if ($debug) {
 	    printf "Prefix/ASNs:\n";
 	    printf "\tCurrent : %i\n", ($#pota + 1);
 	}
 
-	do_add_deletes($old_pot, $pot, \%hist);
+	do_add_deletes($source->{old_pot}, $pot, \%{$source->{hist}});
 	
-	$src_h{prefixes_added}   =  $hist{"adds"};
-	$src_h{prefixes_deleted} =  $hist{"deletes"};
+	$src_h{prefixes_added}   =  $source->{hist}{"adds"};
+	$src_h{prefixes_deleted} =  $source->{hist}{"deletes"};
 
 	if ($debug) {
 	    my $what = \%src_h;
@@ -86,12 +84,12 @@ sub rpkiRtrClientMonitor_getData {
 	    printf "type of %s is %s\n", "src_h", ref \%src_h;
 	    printf "\tSince %s\n", $src_h{last_date};
 
-	    printf "\tAdded   : %i\n", $hist{"adds"};
-	    printf "\tDeleted : %i\n", $hist{"deletes"};
+	    printf "\tAdded   : %i\n", $source->{hist}{"adds"};
+	    printf "\tDeleted : %i\n", $source->{hist}{"deletes"};
 	    printf "\n=============================\n";
 	}
 	
-	$old_pot = $pot;
+	$source->{old_pot} = $pot;
 	push @dsources, \%src_h;
     }
     $data{sources} = \@dsources;
@@ -204,9 +202,9 @@ sub get_prefix_origin_table {
 	    $col = $1;
 	    $val = $8;
 	    $index = "$2::$3::$4::$5::$6";
-	    if ( exists $table{"$index"} ) {
+#	    if ( exists $table{"$index"} ) {
 #		printf "Warning: Dublicate : prefix orgin table : \'$index\'\n";
-	    }
+#	    }
 	}
 	elsif ( $line =~ /^.*\.218\.1\.4\.1\.(\d+)\.(\d+)\.([\d.]+)\.(\d+)\.(\d+)\.(\d+)\.(\d+)\s+=\s+Gauge32:\s+(\d+)/
 	    ) {
@@ -230,11 +228,13 @@ sub get_prefix_origin_table {
 	    }
 	    $index = $prefix . $addr . $postfix;
 	}
-	if ( exists $table{"$index"} ) {
+#	if ( exists $table{"$index"} ) {
 #	    printf "Warning: Dublicate : prefix orgin table : \'$index\'\n";
+#	}
+	if ( "" ne "$index" ) {
+	    $table{"$index"}{"$col"} = $val;
+	    # printf "table{$2::$3::$4::$5::$6}{\"$col\"} = $val\n";
 	}
-	$table{"$index"}{"$col"} = $val;
-	# printf "table{$2::$3::$4::$5::$6}{\"$col\"} = $val\n";
     }
 
     close $SW_H;

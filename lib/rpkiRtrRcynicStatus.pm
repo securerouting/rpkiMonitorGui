@@ -56,7 +56,15 @@ sub rpkiRtrRcynicStatus_getData {
 	#     }
 	# }
 
-	my %ROAS = ();
+	my %ROAS = ( 'certificate_failed_validation' => 0,
+		     'manifest_lists_missing_object' => 0,
+		     'mib_openssl_X509_V_ERR_UNNESTED_RESOURCE' => 0,
+		     'object_rejected' => 0,
+		     'policy_qualifier_cps' => 0,
+		     'tainted_by_stale_crl' => 0,
+		     'tainted_by_stale_manifest' => 0,
+	    );
+
 	my %B_ROAS = ();
 	my %dc = ();
 	my $roa_tot = 0;

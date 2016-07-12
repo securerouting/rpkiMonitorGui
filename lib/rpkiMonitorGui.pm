@@ -12,18 +12,19 @@ get '/' => sub {
     template 'index';
 };
 
+%rpkiMonitorGui::clientConfig =  (
+    hosts => [
+	{ name     => "router1",
+	  location => "127.0.0.1:16161",
+	  password =>  "v2user",
+	  current_prefixes => 0,
+	},
+    ],
+    );
+
 get '/rpki-rtr-client-monitor-data' => sub {
 
-    my %config = (
-	   hosts => [
-	       { name     => "router1",
-		 location => "127.0.0.1:16161",
-		 password =>  "v2user",
-	       },
-           ],
-       );
-    
-    my $data = rpkiRtrClientMonitor::rpkiRtrClientMonitor_getData(\%config);
+    my $data = rpkiRtrClientMonitor::rpkiRtrClientMonitor_getData(\%rpkiMonitorGui::clientConfig);
 
     return $data;
 
